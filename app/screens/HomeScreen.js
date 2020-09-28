@@ -1,0 +1,95 @@
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import HomeMenu from "../components/HomeMenu";
+
+export default function Home() {
+  return (
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+      <View style={styles.info}>
+        <Image source={require("../../assets/images/welcome.png")} />
+        <Text
+          style={{ fontSize: 28, padding: 5, fontFamily: "opensans-regular" }}
+        >
+          Toko Ada Serbaguna
+        </Text>
+        <View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginVertical: 5,
+            }}
+          >
+            <Feather name="map-pin" size={20} color="black" />
+            <Text
+              style={{
+                paddingLeft: 5,
+                fontFamily: "opensans-regular",
+                fontSize: 16,
+              }}
+            >
+              Jalan Akik 10 Tlogomas
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginVertical: 2,
+            }}
+          >
+            <Feather name="phone" size={20} color="black" />
+            <Text
+              style={{
+                paddingLeft: 5,
+                fontFamily: "opensans-regular",
+                fontSize: 16,
+              }}
+            >
+              081334177037
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.menus}>
+        <HomeMenu
+          title="Kasir"
+          subtitle="Transaksi berhasil dan print struk pembayaran"
+          img={require("../../assets/images/giveaway.png")}
+        />
+        <HomeMenu
+          title="Input Barang"
+          subtitle="Input barang dengan memilih dua tipe yaitu grosir dan eceran"
+          img={require("../../assets/images/newsletter.png")}
+        />
+        <HomeMenu
+          title="Input Data Penjual"
+          subtitle="Memasukkan data penjual seperti nama, alamat, dan nomer
+          telephone"
+          img={require("../../assets/images/data.png")}
+        />
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  info: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  menus: {
+    width: "100%",
+    padding: 20,
+  },
+});
