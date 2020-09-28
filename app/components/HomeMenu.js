@@ -4,7 +4,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 const HomeMenu = (props) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={props.screen}>
       <View style={styles.menu}>
         <View style={styles.logo}>
           <Image

@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import HomeMenu from "../components/HomeMenu";
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -59,6 +59,7 @@ export default function Home() {
           title="Kasir"
           subtitle="Transaksi berhasil dan print struk pembayaran"
           img={require("../../assets/images/giveaway.png")}
+          screen={() => navigation.navigate("Kasir")}
         />
         <HomeMenu
           title="Input Barang"
