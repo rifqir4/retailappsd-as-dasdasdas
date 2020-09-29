@@ -1,5 +1,3 @@
-import Home from "../screens/HomeScreen";
-
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 const HomeMenu = (props) => {
@@ -18,9 +16,8 @@ const HomeMenu = (props) => {
             }}
           />
         </View>
-        <View style={{ paddingLeft: 25, flex: 1 }}>
+        <View style={{ paddingLeft: 25, flex: 1, justifyContent: "center" }}>
           <Text style={styles.title}>{props.title}</Text>
-          <Text style={styles.subtitle}>{props.subtitle}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -50,8 +47,7 @@ const styles = StyleSheet.create({
   },
   title: {
     margin: 0,
-    fontSize: 14,
-    fontWeight: "bold",
+    fontSize: 20,
     color: "#323232",
     fontFamily: "opensans-regular",
   },
