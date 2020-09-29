@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./app/screens/Home";
 import Kategori from "./app/screens/Kategori";
 import Kasir from "./app/screens/Kasir";
+import InputBarangSuccess from "./app/screens/InputBarangSuccess";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
             component={Kasir}
             options={{ title: "Keranjang Belanja" }}
           />
+          <Stack.Screen name="InputBarangSuccess" component={InputBarangSuccess} />
         </Stack.Navigator>
       </NavigationContainer>
     );
