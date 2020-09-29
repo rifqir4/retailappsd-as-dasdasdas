@@ -71,6 +71,7 @@ export default function Home({ navigation }) {
           subtitle="Memasukkan data penjual seperti nama, alamat, dan nomer
           telephone"
           img={require("../../assets/images/data.png")}
+          screen={() => navigation.navigate("InputBarangSuccess")}
         />
       </View>
     </View>
