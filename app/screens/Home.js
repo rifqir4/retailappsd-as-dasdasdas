@@ -65,6 +65,7 @@ export default function Home({ navigation }) {
           title="Input Barang"
           subtitle="Input barang dengan memilih dua tipe yaitu grosir dan eceran"
           img={require("../../assets/images/newsletter.png")}
+          screen={() => navigation.navigate("InputBarang")}
         />
         <HomeMenu
           title="Input Data Penjual"

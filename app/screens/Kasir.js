@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 
-const Kasir = () => {
+const Kasir = ({ navigation }) => {
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: "#fff" }}>
       <View
@@ -77,23 +77,30 @@ const Kasir = () => {
         </View>
       </View>
 
-      <View
-        style={{ width: "100%", alignItems: "flex-end", marginVertical: 10 }}
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Kategori");
+        }}
       >
         <View
-          style={{
-            padding: 10,
-            backgroundColor: "#6EEB5A",
-            borderRadius: 10,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={{ width: "100%", alignItems: "flex-end", marginVertical: 10 }}
         >
-          <Text style={{ paddingRight: 5 }}>Tambah Barang Baru</Text>
-          <Feather name="plus" size={20} color="black" />
+          <View
+            style={{
+              padding: 10,
+              backgroundColor: "#6EEB5A",
+              borderRadius: 10,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ paddingRight: 5 }}>Tambah Barang Baru</Text>
+            <Feather name="plus" size={20} color="black" />
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
+
       <ScrollView>
         <View
           style={{
@@ -108,9 +115,9 @@ const Kasir = () => {
         >
           <View>
             <Text>Aqua Galon</Text>
-            <Text>{"\u2B24"} Grosir</Text>
+            <Text style={{ color: "#6EDB5A" }}>{"\u2B24"} Grosir</Text>
           </View>
-          <Text>Rp. 25.000</Text>
+          <Text style={{ fontWeight: "bold" }}>Rp. 25.000</Text>
           <View style={{ flexDirection: "row" }}>
             <Feather
               name="plus"
@@ -149,9 +156,9 @@ const Kasir = () => {
         >
           <View>
             <Text>Aqua Galon</Text>
-            <Text>{"\u2B24"} Grosir</Text>
+            <Text style={{ color: "#6EDB5A" }}>{"\u2B24"} Grosir</Text>
           </View>
-          <Text>Rp. 25.000</Text>
+          <Text style={{ fontWeight: "bold" }}>Rp. 25.000</Text>
           <View style={{ flexDirection: "row" }}>
             <Feather
               name="plus"
@@ -178,22 +185,34 @@ const Kasir = () => {
         </View>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text>Total: </Text>
-          <Text>Rp. 50.000</Text>
+          <Text style={{ fontWeight: "bold" }}>Total: </Text>
+          <Text style={{ fontWeight: "bold" }}>Rp. 50.000</Text>
         </View>
-        <View>
+
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Checkout");
+          }}
+        >
           <View
             style={{
-              flex: 0,
-              flexDirection: "row",
-              padding: 10,
-              backgroundColor: "#6EEB5A",
+              justifyContent: "center",
+              alignItems: "center",
+              marginVertical: 15,
             }}
           >
-            <Feather name="shopping-cart" size={20} color="black" />
-            <Text>Selesaikan Pembelanjaan</Text>
+            <Text
+              style={{
+                backgroundColor: "#6EEB5A",
+                padding: 10,
+                borderRadius: 10,
+              }}
+            >
+              <Feather name="shopping-cart" size={20} color="black" /> {"  "}
+              Selesaikan Pembelanjaan
+            </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
