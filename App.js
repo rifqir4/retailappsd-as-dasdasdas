@@ -9,6 +9,8 @@ import Kategori from "./app/screens/Kategori";
 import Kasir from "./app/screens/Kasir";
 import Checkout from "./app/screens/Checkout";
 import InputBarang from "./app/screens/InputBarang";
+import InputPelanggan from "./app/screens/InputPelanggan";
+import SuccessScreen from "./app/screens/SuccessScreen";
 
 const Stack = createStackNavigator();
 
@@ -36,6 +38,16 @@ export default function App() {
             options={{ title: "Input Barang" }}
           />
           <Stack.Screen name="Kategori" component={Kategori} />
+          <Stack.Screen
+            name="InputPelanggan"
+            component={InputPelanggan}
+            options={{ title: "Input Pelanggan" }}
+          />
+          <Stack.Screen
+            name="SucceesScreen"
+            component={SuccessScreen}
+            options={{ title: "Success" }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );

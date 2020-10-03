@@ -68,10 +68,11 @@ export default function Home({ navigation }) {
           screen={() => navigation.navigate("InputBarang")}
         />
         <HomeMenu
-          title="Input Data Penjual"
+          title="Input Data Pelanggan"
           subtitle="Memasukkan data penjual seperti nama, alamat, dan nomer
           telephone"
           img={require("../../assets/images/data.png")}
+          screen={() => navigation.navigate("InputPelanggan")}
         />
       </View>
     </View>

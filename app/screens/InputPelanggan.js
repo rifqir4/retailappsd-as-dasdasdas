@@ -1,8 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { Alert, Modal, Text, TouchableOpacity, View } from "react-native";
+import React, { useState, Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  TextInput,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { Alert, Modal, TouchableHighlight } from "react-native";
 import { Picker } from "@react-native-community/picker";
 
 const Item = (props) => {
@@ -19,10 +27,11 @@ const Item = (props) => {
       }}
     >
       <View>
-        <Text>Aqua Galon</Text>
-        <Text style={{ color: "#6EDB5A" }}>{"\u2B24"} Grosir</Text>
+        <Text style={{ fontSize: 18, paddingBottom: 10 }}>{props.nama}</Text>
+        <Text style={{ fontSize: 16, paddingBottom: 3 }}>{props.alamat}</Text>
+        <Text style={{ fontSize: 16 }}>{props.telp}</Text>
       </View>
-      <Text style={{ fontWeight: "bold" }}>Rp. 25.000</Text>
+
       <View style={{ flexDirection: "row" }}>
         <Feather
           name="edit"
@@ -46,8 +55,62 @@ const Item = (props) => {
   );
 };
 
-const InputBarang = ({ navigation }) => {
+const InputPelanggan = ({ navigation }) => {
   const [modalToggle, setModalToggle] = useState(false);
+  const [inputNama, setInputNama] = useState("nama");
+  const [inputAlamat, setInputAlamat] = useState("Alamat");
+  const [inputTelp, setInputTelp] = useState("Telp");
+
+  const [pelanggan, setPelanggan] = useState([
+    {
+      key: "1",
+      nama: "Rifqi Radifan",
+      alamat: "Jl. Ikan Piranha Atas",
+      telp: "081334177037",
+    },
+    {
+      key: "2",
+      nama: "Putri Harviana",
+      alamat: "Jl. Akik Tlogomas Malang",
+      telp: "082234168153",
+    },
+  ]);
+
+  const [tempData, setTempData] = useState(pelanggan);
+
+  const [value, onChangeText] = React.useState("Useless Placeholder");
+
+  const searchHandler = (val) => {
+    setTempData(
+      pelanggan.filter((item) => {
+        return item.nama.toLowerCase().includes(val.toLowerCase());
+      })
+    );
+  };
+
+  const inputHandler = () => {
+    setTempData((prevPelanggan) => {
+      return [
+        {
+          nama: inputNama,
+          alamat: inputAlamat,
+          telp: inputTelp,
+          key: Math.random().toString(),
+        },
+        ...prevPelanggan,
+      ];
+    });
+    setInputNama("");
+    setInputAlamat("");
+    setInputTelp("");
+    setModalToggle(false);
+    navigation.navigate("SucceesScreen", {
+      kembali: () => {
+        navigation.navigate("InputPelanggan");
+      },
+    });
+  };
+
   return (
     <View style={{ flex: 1, padding: 20, backgroundColor: "#fff" }}>
       <Modal visible={modalToggle} animationType="fade" transparent={true}>
@@ -75,26 +138,43 @@ const InputBarang = ({ navigation }) => {
                 borderColor: "rgba(0,0,0,0.2)",
               }}
             >
-              Input Barang
+              Input Data Pelanggan
             </Text>
             <View style={{ paddingVertical: 10 }}>
               <View style={{ marginBottom: 10 }}>
-                <Text style={{ fontWeight: "bold" }}>Nama Barang :</Text>
+                <Text style={{ fontWeight: "bold" }}>Nama Pelanggan :</Text>
                 <TextInput
                   style={{ borderBottomWidth: 1, paddingVertical: 2 }}
+                  onChangeText={(val) => {
+                    setInputNama(val);
+                  }}
                 />
               </View>
 
               <View style={{ marginBottom: 10 }}>
-                <Text style={{ fontWeight: "bold" }}>Harga :</Text>
+                <Text style={{ fontWeight: "bold" }}>Alamat :</Text>
+                <TextInput
+                  style={{ borderBottomWidth: 1, padding: 5 }}
+                  onChangeText={(val) => {
+                    setInputAlamat(val);
+                  }}
+                />
+              </View>
+
+              <View style={{ marginBottom: 10 }}>
+                <Text style={{ fontWeight: "bold" }}>Keterangan :</Text>
                 <TextInput style={{ borderBottomWidth: 1, padding: 5 }} />
               </View>
 
-              <Text style={{ fontWeight: "bold" }}>Tipe :</Text>
-              <Picker>
-                <Picker.Item label="Grosir" value="Grosir" />
-                <Picker.Item label="Ecerean" value="Eceran" />
-              </Picker>
+              <View style={{ marginBottom: 10 }}>
+                <Text style={{ fontWeight: "bold" }}>No. Telpon :</Text>
+                <TextInput
+                  style={{ borderBottomWidth: 1, padding: 5 }}
+                  onChangeText={(val) => {
+                    setInputTelp(val);
+                  }}
+                />
+              </View>
             </View>
 
             <View
@@ -117,12 +197,7 @@ const InputBarang = ({ navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setModalToggle(false);
-                  navigation.navigate("SucceesScreen", {
-                    kembali: () => {
-                      navigation.navigate("InputBarang");
-                    },
-                  });
+                  inputHandler();
                 }}
               >
                 <Text
@@ -145,7 +220,7 @@ const InputBarang = ({ navigation }) => {
           marginBottom: 10,
         }}
       >
-        <TouchableOpacity
+        <TouchableHighlight
           onPress={() => {
             setModalToggle(true);
           }}
@@ -161,9 +236,9 @@ const InputBarang = ({ navigation }) => {
               textAlign: "center",
             }}
           >
-            <Feather name="plus" size={18} /> Tambah Barang
+            <Feather name="plus" size={20} /> Tambah Data Pelanggan
           </Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
         <View
           style={{
             flexDirection: "row",
@@ -176,16 +251,21 @@ const InputBarang = ({ navigation }) => {
         >
           <Feather name="search" size={20} style={{ paddingHorizontal: 15 }} />
 
-          <TextInput style={{ flex: 1, paddingRight: 15 }} />
+          <TextInput
+            style={{ flex: 1, paddingRight: 15 }}
+            placeholder="Cari pelanggan"
+            onChangeText={searchHandler}
+          />
         </View>
       </View>
-
-      <ScrollView>
-        <Item />
-        <Item />
-      </ScrollView>
+      <FlatList
+        data={tempData}
+        renderItem={({ item }) => (
+          <Item nama={item.nama} alamat={item.alamat} telp={item.telp} />
+        )}
+      />
     </View>
   );
 };
 
-export default InputBarang;
+export default InputPelanggan;
